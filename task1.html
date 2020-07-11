@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <link rel="stylesheet" href="assignc.css">
+</head>
+<body>
+    <label>Product Name:</label><input type="text" id="prname"><br>
+    <label>Sales in 2015:</label><input type="text" id="sale1"><br>
+    <label>Sales in 2016:</label><input type="text" id="sale2"><br>
+    <label>Sales in 2017:</label><input type="text" id="sale3"><br>
+    <label>Sales in 2018:</label><input type="text" id="sale4"><br>
+    <button onclick="add()">Add Product</button>
+    <div id="display"></div>
+</body>
+<script>
+  var p1= {name:"CK724R",s2015:	77,	s2016:	80,	s2017:	76,	s2018:	62}
+  var p2={name:	"MX206N",s2015:	81,	s2016:	85,	s2017:	66,	s2018:	60}
+  var p3={name:	"AH224T",s2015:	89,	s2016:	73,	s2017:	59,	s2018:	42}
+  var p4={name:	"PB155D",s2015:	39,	s2016:	54,	s2017:	37,	s2018:	33}
+  var p5={name:	"BD110N",s2015:	48,	s2016:	22,	s2017:	41,	s2018:	45}
+var products=[p1,p2,p3,p4,p5];
+    show();
+function getindex(index)
+{
+    var result=-1;
+    for(var i=0;i<products.length;i++)
+    {
+        if(products[i].name==index)
+        {
+            result=i;
+        }
+    }
+    return result;
+}
+function check(p1,p2)
+ {
+               var cal1=p1.s2015+p1.s2016+p1.s2017+p1.s2018;
+               var cal2=p2.s2015+p2.s2016+p2.s2017+p2.s2018;
+               return cal2-cal1;
+ }
+
+
+
+    function add()
+    {
+        var input1=document.getElementById("prname").value;
+        var input2=+document.getElementById("sale1").value;
+        var input3=+document.getElementById("sale2").value;
+        var input4=+document.getElementById("sale3").value;
+        var input5=+document.getElementById("sale4").value;
+        var json={name:input1,s2015:input2,	s2016:input3,
+        	s2017:input4,	s2018:	input5};
+
+           
+             if(getindex(input1)<0)
+            {
+                products.push(json);
+                products.sort(check);
+                show();
+            }
+            else
+            {
+                alert("product already exist");
+            }
+            input1="";
+            input2="";
+            input3="";
+            input4="";
+            input5="";
+
+    }
+
+    function remove(index)
+    {
+        products.splice(index,1);
+        show();
+    }
+    function high(pr)
+    {   
+        if((pr.s2015>pr.s2016&&pr.s2015>pr.s2017)&&(pr.s2015>pr.s2018))
+        {
+            return pr.s2015;
+        }
+        else if((pr.s2016>pr.s2015&&pr.s2016>pr.s2017)&&(pr.s2016>pr.s2018))
+        {
+            return pr.s2016;
+        }
+        else if((pr.s2017>pr.s2016&&pr.s2017>pr.s2015)&&(pr.s2017>pr.s2018))
+        {
+            return pr.s2017;
+        }
+        else
+        {
+            return pr.s2018;
+            
+        }
+        
+    }
+    function average(pr)
+    {
+        mediun=(pr.s2015+pr.s2016+pr.s2017+pr.s2018)/4;
+        return mediun;
+    }
+    function show()
+    { var str="";
+    var header1="<div class='header'>Rank</div>";
+    var header2="<div class='header'>Name</div>";
+    var header3="<div class='header'>2015</div>";
+    var header4="<div class='header'>2016</div>";
+    var header5="<div class='header'>2017</div>";
+    var header6="<div class='header'>2018</div>";
+    var header7="<div class='header'>&nbsp</div>";
+    var header="<div>"+header1+header2+header3+header4+header5+header6+header7+"</div>"
+    str=str+header;
+   
+    for(var i=0;i<products.length;i++)
+    {
+        var pr=products[i];
+        var rank=i+1;var avrg=0,highest;
+        avrg=average(pr);
+        highest=high(pr);
+        var p1="<div class=cell>"+rank+"</div>";
+        var p2="<div class=cell>"+pr.name+"</div>";
+       
+       
+        if(highest==pr.s2015)
+        {
+        var p3="<div class='high'>"+pr.s2015+"</div>";
+        }
+        else if(pr.s2015>=avrg&&highest>pr.s2015)
+        {
+        var p3="<div class='mid'>"+pr.s2015+"</div>";
+         }
+         else
+        {
+        var p3="<div class='low'>"+pr.s2015+"</div>";
+        }
+         
+        
+
+        if(highest==pr.s2016)
+        {
+        var p4="<div class='high'>"+pr.s2016+"</div>";
+        }
+        else if(pr.s2016>=avrg&&highest>pr.s2016)
+        {
+        var p4="<div class='mid'>"+pr.s2016+"</div>";
+         }
+         else
+        {
+        var p4="<div class='low'>"+pr.s2016+"</div>";
+        }
+
+
+
+        if(highest==pr.s2017)
+        {
+        var p5="<div class='high'>"+pr.s2017+"</div>";
+        }
+        else if(pr.s2017>=avrg&&highest>pr.s2017)
+        {
+        var p5="<div class='mid'>"+pr.s2017+"</div>";
+         }
+         else
+        {
+        var p5="<div class='low'>"+pr.s2017+"</div>";
+        }
+        
+       
+        
+        if(highest==pr.s2018)
+        {
+        var p6="<div class='high'>"+pr.s2018+"</div>";
+        }
+        else if(pr.s2018>=avrg&&highest>pr.s2018)
+        {
+        var p6="<div class='mid'>"+pr.s2018+"</div>";
+         }
+         else
+        {
+        var p6="<div class='low'>"+pr.s2018+"</div>";
+        }
+
+
+
+
+
+
+  var p7="<div class=cell><button onclick=remove("+i+")>Remove</button></div>";
+        var allp="<div>"+p1+p2+p3+p4+p5+p6+p7+"</div>";
+        str=str+allp;
+     
+    }
+    var table=document.getElementById("display");
+    table.innerHTML=str;
+}
+</script>
+</html>

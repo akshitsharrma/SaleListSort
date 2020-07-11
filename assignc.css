@@ -1,0 +1,45 @@
+.cell
+{
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+    display: inline-block;
+    width:14%;
+}
+.header
+{
+    background-color: black;
+    color: white;
+    border: 1px solid black;
+    display: inline-block;
+    width:14%;
+    text-align: center;
+}
+
+.mid
+{
+    display: inline-block;
+    width:14%;
+    background-color: lightgreen;
+    color: white;
+    border:1px solid black;
+    text-align: center;
+}
+.low
+{
+    display: inline-block;
+    width:14%;
+    background-color: pink;
+    color: white;
+    border:1px solid black;
+    text-align: center;
+}
+.high
+{
+    display: inline-block;
+    width:14%;
+    background-color: green;
+    color: white;
+    border:1px solid black;
+    text-align: center;
+}
